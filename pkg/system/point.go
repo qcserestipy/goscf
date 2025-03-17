@@ -1,4 +1,8 @@
-package main
+package system
+
+import (
+	"math"
+)
 
 type Point struct {
 	X float64
@@ -43,7 +47,7 @@ func (p Point) Cross(q Point) Point {
 }
 
 func (p Point) Magnitude() float64 {
-	return (p.X*p.X + p.Y*p.Y + p.Z*p.Z)
+    return math.Sqrt(p.X*p.X + p.Y*p.Y + p.Z*p.Z)
 }
 
 func (p Point) Normalize() Point {

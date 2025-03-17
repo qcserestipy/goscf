@@ -100,7 +100,8 @@ import (
 	"net/http"
 
 	"github.com/sirupsen/logrus"
-	"github.com/qcserestipy/goscf"
+	"github.com/qcserestipy/goscf/pkg/util"
+	"github.com/qcserestipy/goscf/pkg/system"
 )
 
 func init(){
@@ -133,11 +134,14 @@ func main() {
 	url := "http://localhost:5000/compute_integrals"
 
 	var xyzfile string = "h2.xyz"
-	atoms, err := readxyzfile(xyzfile)
+	atoms, err := util.ReadXYZFile(xyzfile)
 	if err != nil {
 		logrus.Fatalf("Error reading XYZ file: %v", err)
 	}
 	logrus.Infof("Read %d atoms from %s", len(atoms), xyzfile)
+	var Geometry system.Geometry = system.Geometry{Atoms: atoms}
+	logrus.Infof("Center of mass: %v", Geometry.CenterOfMass())
+	logrus.Infof("Core-core repulsion: %v", Geometry.CoreCoreRepulsion())
 
 	// Define the molecule parameters.
 	reqData := MoleculeRequest{

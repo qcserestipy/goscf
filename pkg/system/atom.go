@@ -1,3 +1,4 @@
+package system
 
 type Atom struct {
 	Position Point
@@ -6,27 +7,15 @@ type Atom struct {
 	Charge  int
 }
 
+func NewAtom(element string, x, y, z float64, mass float64, charge int) Atom {
+    return Atom{
+        Position: Point{X: x, Y: y, Z: z},
+        Element:  element,
+        Mass:     mass,
+        Charge:   charge,
+    }
+}
+
 func (a Atom) Distance(b Atom) float64 {
 	return a.Position.Distance(b.Position)
-}
-
-func (a Atom) Translate(p Point) Atom {
-	return Atom{
-		Position: a.Position.Add(p),
-		Element:  a.Element,
-		Mass:    a.Mass,
-		Charge:  a.Charge,
-	}
-}
-
-func (a Atom) Rotate(axis Point, angle float64) Atom {
-	// Rotate the position of the atom.
-	rotatedPosition := a.Position.Rotate(axis, angle)
-
-	return Atom{
-		Position: rotatedPosition,
-		Element:  a.Element,
-		Mass:    a.Mass,
-		Charge:  a.Charge,
-	}
 }
