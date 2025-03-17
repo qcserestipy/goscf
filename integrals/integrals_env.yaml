@@ -1,0 +1,10 @@
+name: pyscf
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+    - Flask==2.0.3
+    - git+https://github.com/pyscf/pyscf 
